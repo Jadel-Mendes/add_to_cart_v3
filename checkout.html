@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      color: #333;
+      transition:  0.3s, color 0.3s;
+    }
+
+    /* ✅ Dark Mode */
+    body.dark {
+      background: #121212;
+      color: #f1f1f1;
+    }
+    body.dark .checkout-container {
+      background: #1e1e1e;
+      color: #f1f1f1;
+      border: 1px solid #333;
+    }
+    body.dark .cart-summary {
+      background: #2a2a2a;
+      border: 1px solid #444;
+    }
+    body.dark input,
+    body.dark select {
+      background: #2a2a2a;
+      color: #f1f1f1;
+      border: 1px solid #555;
+    }
+    body.dark .checkout-container button {
+      background: #FF6B6B;
+      color: #fff;
+    }
+
+    .checkout-container {
+      max-width: 700px;
+      margin: 80px auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      transition: background 0.3s, color 0.3s;
+    }
+    .checkout-container h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #FF6B6B;
+    }
+    .cart-summary {
+      margin-bottom: 30px;
+      padding: 20px;
+      background: #f9f9f9;
+      border-radius: 10px;
+      border: 1px solid #ddd;
+      transition: background 0.3s, border 0.3s;
+    }
+    .cart-summary h2 {
+      margin-bottom: 15px;
+      font-size: 1.3rem;
+      color: inherit;
+    }
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #eee;
+    }
+    .cart-item:last-child {
+      border-bottom: none;
+    }
+    .cart-item span {
+      font-size: 0.95rem;
+    }
+    .cart-total {
+      text-align: right;
+      margin-top: 15px;
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+    .checkout-container label {
+      display: block;
+      margin: 10px 0 5px;
+      font-weight: 500;
+    }
+    .checkout-container input,
+    .checkout-container select {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      margin-bottom: 15px;
+      transition: background 0.3s, color 0.3s, border 0.3s;
+    }
+    .checkout-container button {
+      width: 100%;
+      background: #FF6B6B;
+      color: #fff;
+      padding: 12px;
+      border: none;
+      border-radius: 25px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .checkout-container button:hover {
+      background: #FF8787;
+    }
+
+    /* ✅ Dark Mode Toggle Button */
+    #darkToggle {
+      position: fixed;
+      top: 15px;
+      right: 15px;
+      font-size: 1.3rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <!-- ✅ Dark Mode Toggle -->
+  <button id="darkToggle">🌙</button>
+
+  <div class="checkout-container">
+    <h1>Checkout</h1>
+
+    <!-- ✅ Cart Summary -->
+    <div class="cart-summary" id="cartSummary">
+      <h2>Your Order</h2>
+      <div id="cartItems"></div>
+      <div class="cart-total" id="cartTotal"></div>
+    </div>
+
+    <!-- ✅ Checkout Form -->
+    <form id="checkoutForm">
+      <label for="name">Full Name</label>
+      <input type="text" id="name" required>
+
+      <label for="email">Email</label>
+      <input type="email" id="email" required>
+
+      <label for="address">Address</label>
+      <input type="text" id="address" required>
+
+      <label for="payment">Payment Method</label>
+      <select id="payment" required>
+        <option value="">Select</option>
+        <option value="card">Credit/Debit Card</option>
+        <option value="paypal">PayPal</option>
+        <option value="cod">Cash on Delivery</option>
+      </select>
+
+      <button type="submit">Place Order</button>
+    </form>
+  </div>
+
+  <script>
+    // ✅ Load cart summary from localStorage
+    const cartItemsContainer = document.getElementById("cartItems");
+    const cartTotalContainer = document.getElementById("cartTotal");
+
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const productsPromise = fetch("products.json").then(res => res.json());
+
+    async function renderCartSummary() {
+      const products = await productsPromise;
+      cartItemsContainer.innerHTML = "";
+      let totalCost = 0;
+
+      if (cart.length === 0) {
+        cartItemsContainer.innerHTML = "<p>Your cart is empty.</p>";
+        cartTotalContainer.innerHTML = "";
+        return;
+      }
+
+      cart.forEach(item => {
+        const product = products.find(p => p.id == item.product_id);
+        if (product) {
+          let itemTotal = product.price * item.quantity;
+          totalCost += itemTotal;
+
+          const div = document.createElement("div");
+          div.classList.add("cart-item");
+          div.innerHTML = `
+            <span>${product.name} × ${item.quantity}</span>
+            <span>£${itemTotal.toFixed(2)}</span>
+          `;
+          cartItemsContainer.appendChild(div);
+        }
+      });
+
+      cartTotalContainer.innerHTML = `Total: £${totalCost.toFixed(2)}`;
+    }
+
+    renderCartSummary();
+
+    // ✅ Handle checkout form
+    document.getElementById("checkoutForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      if (cart.length === 0) {
+        alert("Your cart is empty!");
+        return;
+      }
+      alert("✅ Thank you! Your order has been placed.");
+      localStorage.removeItem("cart"); // clear cart
+      window.location.href = "index.html"; // return to shop
+    });
+
+    // ✅ Dark Mode Toggle
+    const darkToggle = document.getElementById("darkToggle");
+    if (localStorage.getItem("darkMode") === "enabled") {
+      document.body.classList.add("dark");
+      darkToggle.textContent = "☀️";
+    }
+    darkToggle.addEventListener("click", () => {
+      document.body.classList.toggle("dark");
+      if (document.body.classList.contains("dark")) {
+        localStorage.setItem("darkMode", "enabled");
+        darkToggle.textContent = "☀️";
+      } else {
+        localStorage.setItem("darkMode", "disabled");
+        darkToggle.textContent = "🌙";
+      }
+    });
+  </script>
+</body>
+</html>

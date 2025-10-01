@@ -1,0 +1,37 @@
+[
+  { "id": 1, "name": "LD01 Lounge Chair", "price": 200, "image": "image/LD01 Lounge Chair.jpeg", "category": "Furniture" },
+  { "id": 2, "name": "LD02 Lounge Chair", "price": 250, "image": "image/LD02 Lounge Chair.jpeg", "category": "Furniture" },
+  { "id": 3, "name": "LD03 Sofa", "price": 500, "image": "image/LD03 Sofa.jpeg", "category": "Furniture" },
+  { "id": 4, "name": "Wooden Coffee Table", "price": 180, "image": "image/Wooden Coffee Table.jpeg", "category": "Furniture" },
+  { "id": 5, "name": "Dining Table Set", "price": 700, "image": "image/Dining Table Set.jpeg", "category": "Furniture" },
+  { "id": 6, "name": "Office Chair", "price": 220, "image": "image/Office Chair.png", "category": "Furniture" },
+  { "id": 7, "name": "Bookshelf", "price": 150, "image": "image/Bookshelf.jpeg", "category": "Furniture" },
+  { "id": 8, "name": "Bed Frame", "price": 650, "image": "image/Bed Frame.jpeg", "category": "Furniture" },
+
+  { "id": 9, "name": "Smartphone X100", "price": 800, "image": "image/Smartphone X100.jpeg", "category": "Tech" },
+  { "id": 10, "name": "Wireless Headphones", "price": 150, "image": "image/Wireless Headphones.jpeg", "category": "Tech" },
+  { "id": 11, "name": "Gaming Laptop Z", "price": 1200, "image": "image/Gaming Laptop Z.jpeg", "category": "Tech" },
+  { "id": 12, "name": "Smartwatch Pro", "price": 220, "image": "image/Smartwatch Pro.jpeg", "category": "Tech" },
+  { "id": 13, "name": "Tablet Plus", "price": 500, "image": "image/Tablet Plus.jpeg", "category": "Tech" },
+  { "id": 14, "name": "Bluetooth Speaker", "price": 100, "image": "image/Bluetooth Speaker.jpeg", "category": "Tech" },
+  { "id": 15, "name": "Gaming Mouse", "price": 60, "image": "image/Gaming Mouse.jpeg", "category": "Tech" },
+  { "id": 16, "name": "4K Monitor", "price": 400, "image": "image/4K Monitor.jpeg", "category": "Tech" },
+
+  { "id": 17, "name": "Summer T-Shirt", "price": 30, "image": "image/Summer T-Shirt.jpeg", "category": "Clothing" },
+  { "id": 18, "name": "Casual Sneakers", "price": 70, "image":"image/Casual Sneakers.jpeg", "category": "Clothing" },
+  { "id": 19, "name": "Denim Jacket", "price": 90, "image": "image/Denim Jacket.jpeg", "category": "Clothing" },
+  { "id": 20, "name": "Formal Shirt", "price": 50, "image": "image/Formal Shirt.jpeg", "category": "Clothing" },
+  { "id": 21, "name": "Winter Coat", "price": 180, "image": "image/Winter Coat.jpeg", "category": "Clothing" },
+  { "id": 22, "name": "Jeans Pants", "price": 60, "image": "image/Jeans Pants.jpeg", "category": "Clothing" },
+  { "id": 23, "name": "Sport Hoodie", "price": 75, "image": "image/Sport Hoodie.jpeg", "category": "Clothing" },
+  { "id": 24, "name": "Running Shorts", "price": 40, "image": "image/Running Shorts.jpeg", "category": "Clothing" },
+
+  { "id": 25, "name": "Leather Wallet", "price": 45, "image": "image/Leather Wallet.jpeg", "category": "Accessories" },
+  { "id": 26, "name": "Wrist Watch", "price": 120, "image": "image/Wrist Watch.jpeg", "category": "Accessories" },
+  { "id": 27, "name": "Sunglasses", "price": 60, "image": "image/Sunglasses.jpeg", "category": "Accessories" },
+  { "id": 28, "name": "Backpack", "price": 85, "image": "image/Backpack.jpeg", "category": "Accessories" },
+  { "id": 29, "name": "Baseball Cap", "price": 25, "image": "image/Baseball Cap.jpeg", "category": "Accessories" },
+  { "id": 30, "name": "Scarf", "price": 35, "image": "image/Scarf.jpeg", "category": "Accessories" },
+  { "id": 31, "name": "Bracelet", "price": 40, "image": "image/Bracelet.jpeg", "category": "Accessories" },
+  { "id": 32, "name": "Beanie Hat", "price": 28, "image": "image/Beanie Hat.jpeg", "category": "Accessories" }
+]
